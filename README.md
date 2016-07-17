@@ -1,11 +1,12 @@
 # slash-profile
-Slack slash command to get profile info
 
 Slack's custom profile fields are great!  But looking them up takes a while.  What if it were this easy?
 
 ![`/pronoun benkraft`](screenshots/benkraft-pronoun-request.png)
 
 ![benkraft's gender pronoun is he.](screenshots/benkraft-pronoun-response.png)
+
+This is the code that backs them all: `/github`, `/house`, `/pronoun`, and `/twitter`, currently.
 
 ## Configuration
 

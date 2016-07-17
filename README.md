@@ -1,7 +1,11 @@
 # slash-profile
 Slack slash command to get profile info
 
-TODO(benkraft): screenshots and/or description
+Slack's custom profile fields are great!  But looking them up takes a while.  What if it were this easy?
+
+![`/pronoun benkraft`](screenshots/benkraft-pronoun-request.png)
+
+![benkraft's gender pronoun is he.](screenshots/benkraft-pronoun-response.png)
 
 ## Configuration
 

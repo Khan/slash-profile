@@ -49,7 +49,9 @@ def get_profile_field(user_id, field):
                          {'user': user_id, 'include_labels': 1})['profile']
     logging.debug("profile data %s" % data)
     for key in field.split('/'):
-        if key in data:
+        # NOTE: If the user hasn't filled any custom fields, "fields" will be
+        # null instead of [].
+        if data.get(key):
             data = data[key]
         else:
             return None  # Caller must determine why.

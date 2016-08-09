@@ -47,7 +47,6 @@ def get_profile_field(user_id, field):
     """Field is slash-separated, e.g. "email" or "fields/Xxxxxxxx"."""
     data = hit_slack_api('users.profile.get',
                          {'user': user_id, 'include_labels': 1})['profile']
-    logging.debug("profile data %s" % data)
     for key in field.split('/'):
         # NOTE: If the user hasn't filled any custom fields, "fields" will be
         # null instead of [].
@@ -61,11 +60,9 @@ def get_profile_field(user_id, field):
 def get_full_answer(username, field):
     try:
         user_id = get_user_id(username.strip("@"))
-        logging.debug("user ID %s" % user_id)
         if not user_id:
             return "No user '%s' found." % username
         field_data = get_profile_field(user_id, field)
-        logging.debug("field data %s" % field_data)
         if isinstance(field_data, dict):
             # Custom fields are dicts with labels (since we asked for them) and
             # values.  The labels tend to be title-cased.
@@ -82,7 +79,6 @@ def get_full_answer(username, field):
             # Custom fields are omitted if not defined, so see if it exists.
             field_id = field.split('/')[1]
             field_infos = get_profile_field_infos()
-            logging.debug("field info %s" % field_infos)
             for field_info in field_infos:
                 if field_info['id'] == field_id:
                     return "%s has not listed a %s." % (
@@ -110,7 +106,6 @@ class Profile(webapp2.RequestHandler):
             self.response.set_status(401)
             return
 
-        logging.debug("request %s" % self.request)
         text = self.request.get('text')
         if not text or ' ' in text:
             self.response.write("Usage: /<command> <username>.")
